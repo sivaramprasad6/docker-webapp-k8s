@@ -2,7 +2,7 @@
 # Then open http://localhost:8080 and register a new user to test
 services:
   devopsdb:
-    build: ./Docker-db
+    image: ksvsivaramprasad/k8s:db
     environment:
       MYSQL_ROOT_PASSWORD: localrootpass
       MYSQL_USER: vprofile
@@ -13,9 +13,9 @@ services:
       retries: 12
 
   app:
-    build: .
+    image: ksvsivaramprasad/k8s:app
     ports:
-      - "8080:8080"
+      - "1111:8080"
     environment:
       JDBC_URL: "jdbc:mysql://devopsdb:3306/accounts?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false"
       JDBC_USERNAME: vprofile
